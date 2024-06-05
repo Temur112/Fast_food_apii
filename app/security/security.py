@@ -67,7 +67,7 @@ def get_current_user(token:str = Depends(oauth2bearer)):
         role = payload.get("role")
 
 
-        print(login, userid, role)
+        # print(login, userid, role)
         if login is None or userid is None:
             raise utils.get_user_exception()
         
@@ -82,7 +82,7 @@ def get_current_user(token:str = Depends(oauth2bearer)):
     
 
 def get_current_user_role(required_role:Role):
-    print(required_role)
+    # print(required_role)
     def role_checker(user: dict = Depends(get_current_user)):
         if user.get("role") != required_role:
             raise utils.permission_exception()

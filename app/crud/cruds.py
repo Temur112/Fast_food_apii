@@ -52,12 +52,13 @@ def create_meal(meal:CreateMeal, db:Session):
     new_meal.description = meal.description
     new_meal.category = meal.category
     new_meal.price = meal.price
+    print(new_meal)
 
-    # unique name constraint need to checked i fneeded (title)
 
     db.add(new_meal)
     db.commit()
     db.refresh(new_meal)
+    print(new_meal)
 
     return new_meal
 
@@ -79,8 +80,8 @@ def updatemeal(id:int, newmeal:UpdateMeal, db):
     db.refresh(meal)
     return meal
 
-def delete_meal_by_id(id: int, db: Session):
-    meal = get_product_details_by_id(id, db)
+def delete_meal(id: int, db: Session):
+    meal =  get_product_details_by_id(id, db)
     if meal:
         db.delete(meal)
         db.commit()

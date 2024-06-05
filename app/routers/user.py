@@ -24,7 +24,7 @@ async def explore_meals(skip: int = 0, limit: int = 10, db: Session = Depends(ge
 
 @router.get("/meals/{id}")
 async def get_meal_detail_by_id(id: int, db:Session = Depends(get_db)):
-    return get_meal_detail_by_id(id, db)
+    return get_product_details_by_id(id, db)
 
 @router.post("/order")
 async def oreder_meals(order_request: OrderRequest, distance:int = 1, db: Session = Depends(get_db), user: dict = Depends(get_current_user_role(Role.user))):

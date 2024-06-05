@@ -17,7 +17,7 @@ router = APIRouter(
 
 @router.post("/createWaiter")
 async def create_waiter_profile(waiter: CreateUser, role:Role, db: Session = Depends(get_db), user:dict = Depends(get_current_user_role(Role.admin))):
-    print(user)
+    # print(user)
     if user is None:
         raise utils.get_user_exception
     
