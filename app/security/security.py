@@ -58,7 +58,7 @@ def create_access_token(email:str, userid:int, role, expires_delta: Optional[tim
 oauth2bearer = OAuth2PasswordBearer(tokenUrl="token")
 
 
-async def get_current_user(token:str = Depends(oauth2bearer)):
+def get_current_user(token:str = Depends(oauth2bearer)):
     try:
         payload = jwt.decode(token, SECRETKEY, algorithms=[ALGORITHM])
         login = payload.get("email")
@@ -78,7 +78,7 @@ async def get_current_user(token:str = Depends(oauth2bearer)):
         raise  utils.get_user_exception
     
 
-async def get_current_user_role(required_role:str):
+def get_current_user_role(required_role:str):
     def role_checker(user: dict = Depends(get_current_user)):
         if user.get("role") != required_role:
             raise utils.permission_exception

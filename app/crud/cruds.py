@@ -11,10 +11,10 @@ from schemes.order_meal_schema import CreateMeal, UpdateMeal
 def create_default_user(user: CreateUser, db: Session):
     new_user = User()
 
-    new_user.email = CreateUser.email
-    new_user.username = CreateUser.username
+    new_user.email = user.email
+    new_user.username = user.username
     new_user.role = Role.user
-    hashed_pass = get_hashed_password(CreateUser.password)
+    hashed_pass = get_hashed_password(user.password)
     new_user.password = hashed_pass
 
     db.add(new_user)

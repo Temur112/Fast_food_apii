@@ -55,5 +55,5 @@ class OrderDetail(Base):
 
     # Relationships
     order = relationship("Order", back_populates="order_details")
-    meal = relationship("Meal", back_populates="order_details")
+    meal = relationship("Meals", back_populates="order_details")
 

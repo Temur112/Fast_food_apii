@@ -1,2 +1,6 @@
 fastapi,
 sqlalchemy
+uvicorn
+jose
+bcrypt
+python-multipart

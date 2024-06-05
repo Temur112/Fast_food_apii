@@ -12,16 +12,17 @@ router = APIRouter(
     prefix="/auth",
     tags=["auth"],
     responses={401:{"user": "not authorized"}}
+
 )
 
 @router.post("/register")
-async def register_user(user:CreateUser, db: Session = Depends(get_db)):
-    user = get_user_by_email(email=CreateUser.useremail)
+async def register_user(newuser:CreateUser, db: Session = Depends(get_db)):
+    user = get_user_by_email(newuser.email, db)
 
     if user is not None:
         raise HTTPException(status_code=400, detail="User with this email have already registered")
     
-    new_user = create_default_user(CreateUser, db)
+    new_user = create_default_user(newuser, db)
 
     return new_user
 

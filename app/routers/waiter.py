@@ -28,7 +28,7 @@ async def create_meal(meal:CreateMeal, db:Session = Depends(get_db), user:dict =
 
 
 @router.put("/updateMeal/{id}")
-async def update_meal(id: int, newmeal:UpdateMeal, db: Session = Depends(get_db), user:dict = Depends(get_current_user_role)):
+async def update_meal(id: int, newmeal:UpdateMeal, db: Session = Depends(get_db), user:dict = Depends(get_current_user_role(Role.waiter))):
     if user is None:
         raise utils.no_such_waiter_exception
     
@@ -76,7 +76,7 @@ async def explore_orders(id: int, db:Session = Depends(get_db), user:dict = Depe
 
 
 
-@router.put("/update{order_id}/status")
+@router.put("/update/{order_id}/status")
 async def update_order_status(order_id:int, in_proccess:bool, db:Session = Depends(get_db), user:dict = Depends(get_current_user_role(Role))):
     if user is None:
         return utils.no_such_waiter_exception()

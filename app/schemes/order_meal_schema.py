@@ -12,15 +12,15 @@ class OrderRequest(BaseModel):
 
 class CreateMeal(BaseModel):
 
-    title : Field(str, max_length=100, min_length=3)
-    category : Field(str, max_length=100, min_length=5)
-    description = Field(str, max_length=100, min_length=5)
-    price = float
+    title:str = Field( max_length=100, min_length=3)
+    category:str = Field(max_length=100, min_length=5)
+    description:str =  Field(max_length=100, min_length=5)
+    price: float
     
 
 class UpdateMeal(BaseModel):
 
     title: Optional[str]
-    category : Optional[str]
-    description = Optional[str]
-    price = Optional[str]
+    category: Optional[str]
+    description: Optional[str]
+    price: Optional[str]
