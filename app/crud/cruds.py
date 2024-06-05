@@ -8,12 +8,12 @@ from schemes.order_meal_schema import CreateMeal, UpdateMeal
 
 
 # User part
-def create_default_user(user: CreateUser, db: Session):
+def create_user(user: CreateUser, role:Role, db: Session):
     new_user = User()
 
     new_user.email = user.email
     new_user.username = user.username
-    new_user.role = Role.user
+    new_user.role = role
     hashed_pass = get_hashed_password(user.password)
     new_user.password = hashed_pass
 
