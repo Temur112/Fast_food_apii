@@ -7,6 +7,7 @@ from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends
 from utils import utils
 from jose.exceptions import  JWTError
+from enums.enums import Role
 
 
 ALGORITHM = "HS256"
@@ -61,10 +62,12 @@ oauth2bearer = OAuth2PasswordBearer(tokenUrl="token")
 def get_current_user(token:str = Depends(oauth2bearer)):
     try:
         payload = jwt.decode(token, SECRETKEY, algorithms=[ALGORITHM])
-        login = payload.get("email")
+        login = payload.get("login")
         userid = payload.get("id")
         role = payload.get("role")
 
+
+        print(login, userid, role)
         if login is None or userid is None:
             raise utils.get_user_exception()
         
@@ -78,10 +81,11 @@ def get_current_user(token:str = Depends(oauth2bearer)):
         raise  utils.get_user_exception
     
 
-def get_current_user_role(required_role:str):
+def get_current_user_role(required_role:Role):
+    print(required_role)
     def role_checker(user: dict = Depends(get_current_user)):
         if user.get("role") != required_role:
-            raise utils.permission_exception
+            raise utils.permission_exception()
         
         return user
     return role_checker

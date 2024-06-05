@@ -35,6 +35,7 @@ async def register_user(newuser:CreateUser, db: Session = Depends(get_db)):
     
     new_user = create_user(newuser, Role.user, db)
 
+    new_user.password = ""
     return new_user
 
 @router.post("/login")

@@ -111,6 +111,12 @@ def get_order_by_id(id:int, db:Session):
 
     return response
 
+
+##admin part
+
+def explore_users(skip:int, limit:int, db:Session):
+    return db.query(User).offset(skip).limit(limit).all()
+
 ## 
 def calculate_waiting_time(db:Session, distance:int):
     meals = db.query(Order).filter(Order.in_process == True).all()
